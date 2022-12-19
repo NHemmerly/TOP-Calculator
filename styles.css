@@ -1,1 +1,19 @@
 /*Styling for TOP-calculator*/
+body {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}
+
+button {
+    width: 60px;
+    height: 60px;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    width: 70vw;
+    align-items: center;
+}
+
