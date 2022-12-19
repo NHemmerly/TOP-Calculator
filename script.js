@@ -1,7 +1,7 @@
 //Logic for the calculator
 
-let operand_a = 0;
-let operand_b = 0;
+let operandA = 0;
+let operandB = 0;
 let opp = "";
 
 function add(a, b) {
@@ -24,9 +24,18 @@ function operate(a, opp, b) {
     return opp(a, b);
 }
 
-function readBtn(e) {
-    
+function updateDisplay(a) {
+    document.getElementById("answer").innerText = `${a}`;
 }
+
+function readBtn(e) {
+    let btnSelect = (e.target.innerText);
+    console.log(btnSelect);
+    updateDisplay(btnSelect);
+}
+
+
 
 const btns = document.querySelectorAll(".btn");
 btns.forEach(btn => btn.addEventListener('click', readBtn));
+console.log(document.querySelector(".btn").textContent);
