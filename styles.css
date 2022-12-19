@@ -3,15 +3,19 @@ body {
     display: flex;
     width: 100%;
     justify-content: center;
-    background-color: #E2D7A7;
+    background-color: #F3E9B9;
 }
 
 button {
     width: 65px;
     height: 65px;
-    background-color: #CCCCCC;
+    background-color: #CF9F8F;
     font-size: larger;
     font-weight: 700;
+}
+
+button:hover {
+    background-color: #E0A370;
 }
 
 .container {
@@ -24,12 +28,12 @@ button {
 
 .digits {
     display: grid;
-    grid-template-columns: auto auto auto auto;
+    grid-template-columns: auto auto auto auto auto;
     gap: 10px;
 }
 
 .display {
-    width: 290px;
+    width: 365px;
     height: 100px;
     background-color: #8F8FDF;
     margin: 20px;
@@ -39,6 +43,7 @@ button {
     display: flex;
     flex-direction: column;
     align-items: flex-end;
+    margin: 5px;
 }
 
 .display-text p {
