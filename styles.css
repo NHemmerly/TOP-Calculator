@@ -3,11 +3,15 @@ body {
     display: flex;
     width: 100%;
     justify-content: center;
+    background-color: #EEEEEE;
 }
 
 button {
-    width: 60px;
-    height: 60px;
+    width: 65px;
+    height: 65px;
+    background-color: #CCCCCC;
+    font-size: larger;
+    font-weight: 700;
 }
 
 .container {
@@ -15,5 +19,18 @@ button {
     flex-direction: column;
     width: 70vw;
     align-items: center;
+}
+
+.digits {
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    gap: 10px;
+}
+
+.display {
+    width: 270px;
+    height: 100px;
+    background-color: #8F8FDF;
+    margin: 20px;
 }
 
