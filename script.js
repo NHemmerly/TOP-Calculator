@@ -1,6 +1,8 @@
 //Logic for the calculator
 
-let runningProd = 0;
+let operand_a = 0;
+let operand_b = 0;
+let opp = "";
 
 function add(a, b) {
     return a + b;
@@ -22,9 +24,9 @@ function operate(a, opp, b) {
     return opp(a, b);
 }
 
-console.log(add(20, 2));
-console.log(subtract(20, 2));
-console.log(multiply(20, 2));
-console.log(divide(20, 2));
+function readBtn(e) {
+    
+}
 
-console.log(operate(20, add, 2));
+const btns = document.querySelectorAll(".btn");
+btns.forEach(btn => btn.addEventListener('click', readBtn));
