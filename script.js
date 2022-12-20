@@ -40,11 +40,13 @@ function updateDisplay(a) {
 
 function readBtn(e) {
     let btnSelect = (e.target.innerText);
-    if (btnSelect == '0' && document.getElementById("answer").innerText.length > 0) {
-        updateDisplay(btnSelect);
-    }
-    else if (numReg.test(btnSelect) && btnSelect != 0 || btnSelect == '.') {
-        updateDisplay(btnSelect);
+    if (document.getElementById("answer").innerText.length < 28) {
+        if (btnSelect == '0' && document.getElementById("answer").innerText.length > 0) {
+            updateDisplay(btnSelect);
+        }
+        else if (numReg.test(btnSelect) && btnSelect != 0 || btnSelect == '.') {
+            updateDisplay(btnSelect);
+        }
     }
 }
 
