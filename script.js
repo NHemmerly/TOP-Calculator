@@ -46,13 +46,9 @@ function operate(a, opp, b) {
 
 //Functions to carry out calculations
 function prepareCalc(opp) {
-    if (opp === '=') {
-        operate(operandA, opp, operandB);
-    } else {
-        document.getElementById("ongoing").innerText = operandA;
-        document.getElementById("operator").innerText = opp;
-        document.getElementById("answer").innerText = " ";
-    }
+    document.getElementById("ongoing").innerText = operandA;
+    document.getElementById("operator").innerText = opp;
+    document.getElementById("answer").innerText = " ";
 }
 
 
