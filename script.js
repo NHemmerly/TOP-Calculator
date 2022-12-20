@@ -6,7 +6,6 @@ let answer = document.getElementById("answer").innerText;
 
 let operandA = 0;
 let operandB = 0;
-let opp = "";
 
 //Functions for each of the operations 
 function add(a, b) {
@@ -26,14 +25,33 @@ function divide(a, b) {
 }
 
 function operate(a, opp, b) {
+    switch (opp) {
+        case '+':
+            opp = 'add';
+            break;
+        case '-':
+            opp = 'subtract';
+            break;
+        case 'X':
+            opp = 'multiply';
+            break;
+        case '/':
+            opp = 'divide';
+            break;
+    }
     return opp(a, b);
 }
 
 //Functions to carry out calculations
 function prepareCalc(opp) {
-    document.getElementById("ongoing").innerText = operandA;
-    document.getElementById("operator").innerText = opp;
-    document.getElementById("answer").innerText = " ";
+    if (opp = '=') {
+        operate(operandA, lastOpp, operandB);
+    } else {
+        document.getElementById("ongoing").innerText = operandA;
+        document.getElementById("operator").innerText = opp;
+        document.getElementById("answer").innerText = " ";
+    }
+    let lastOpp = opp;
 }
 
 
