@@ -1,5 +1,8 @@
 //Logic for the calculator
 
+const numReg = /^\d+$/;
+let answer = document.getElementById("answer").innerText;
+
 let operandA = 0;
 let operandB = 0;
 let opp = "";
@@ -25,17 +28,20 @@ function operate(a, opp, b) {
 }
 
 function updateDisplay(a) {
-    document.getElementById("answer").innerText = `${a}`;
+    document.getElementById("answer").innerText += a;
 }
 
 function readBtn(e) {
     let btnSelect = (e.target.innerText);
-    console.log(btnSelect);
-    updateDisplay(btnSelect);
+    if (btnSelect == '0' && document.getElementById("answer").innerText.length > 0) {
+        updateDisplay(btnSelect);
+    }
+    else if (numReg.test(btnSelect) && btnSelect != 0) {
+        updateDisplay(btnSelect);
+    }
 }
 
 
 
 const btns = document.querySelectorAll(".btn");
 btns.forEach(btn => btn.addEventListener('click', readBtn));
-console.log(document.querySelector(".btn").textContent);
