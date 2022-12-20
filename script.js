@@ -28,7 +28,13 @@ function operate(a, opp, b) {
 }
 
 function updateDisplay(a) {
-    document.getElementById("answer").innerText += a;
+    if (a == '.' && document.getElementById("answer").innerText.length < 1) {
+        document.getElementById("answer").innerText += `0${a}`;
+    } else if (a == '.' && !(document.getElementById("answer").innerText.includes('.'))) {
+        document.getElementById("answer").innerText += `${a}`;
+    } else if (a != '.') {
+        document.getElementById("answer").innerText += `${a}`;
+    }
     operandA = document.getElementById("answer").innerText;
 }
 
@@ -37,7 +43,7 @@ function readBtn(e) {
     if (btnSelect == '0' && document.getElementById("answer").innerText.length > 0) {
         updateDisplay(btnSelect);
     }
-    else if (numReg.test(btnSelect) && btnSelect != 0) {
+    else if (numReg.test(btnSelect) && btnSelect != 0 || btnSelect == '.') {
         updateDisplay(btnSelect);
     }
 }
