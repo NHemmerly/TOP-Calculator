@@ -34,6 +34,7 @@ function prepareCalc(opp) {
     document.getElementById("ongoing").innerText = operandA;
     document.getElementById("operator").innerText = opp;
     document.getElementById("answer").innerText = " ";
+    operandB = operandA;
 }
 
 
