@@ -27,21 +27,7 @@ function divide(a, b) {
 }
 
 function operate(a, opp, b) {
-    switch (opp) {
-        case '+':
-            operandA = add(a, b);
-            break;
-        case '-':
-            operandA = subtract(a, b);
-            break;
-        case 'X':
-            operandA = multiply(a, b);
-            break;
-        case '/':
-            operandA = divide(a, b);
-            break;
-    }
-    lastOpp = opp;
+    return opp(a, b);
 }
 
 //Functions to carry out calculations
