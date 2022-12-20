@@ -29,6 +29,7 @@ function operate(a, opp, b) {
 
 function updateDisplay(a) {
     document.getElementById("answer").innerText += a;
+    operandA = document.getElementById("answer").innerText;
 }
 
 function readBtn(e) {
