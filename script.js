@@ -7,6 +7,8 @@ let answer = document.getElementById("answer").innerText;
 let operandA = 0;
 let operandB = 0;
 
+let lastOpp = '';
+
 //Functions for each of the operations 
 function add(a, b) {
     return a + b;
@@ -27,31 +29,30 @@ function divide(a, b) {
 function operate(a, opp, b) {
     switch (opp) {
         case '+':
-            opp = 'add';
+            operandA = add(a, b);
             break;
         case '-':
-            opp = 'subtract';
+            operandA = subtract(a, b);
             break;
         case 'X':
-            opp = 'multiply';
+            operandA = multiply(a, b);
             break;
         case '/':
-            opp = 'divide';
+            operandA = divide(a, b);
             break;
     }
-    return opp(a, b);
+    lastOpp = opp;
 }
 
 //Functions to carry out calculations
 function prepareCalc(opp) {
-    if (opp = '=') {
-        operate(operandA, lastOpp, operandB);
+    if (opp === '=') {
+        operate(operandA, opp, operandB);
     } else {
         document.getElementById("ongoing").innerText = operandA;
         document.getElementById("operator").innerText = opp;
         document.getElementById("answer").innerText = " ";
     }
-    let lastOpp = opp;
 }
 
 
@@ -71,21 +72,20 @@ function updateDisplay(a) {
 //Reads the content of whichever button is clicked
 function readBtn(e) {
     let btnSelect = (e.target.innerText);
-    switch (true) {
-        case functReg.test(btnSelect):
+    console.log(functReg.test(btnSelect));
+        if (functReg.test(btnSelect)) {
+            operandA = document.getElementById("answer").innerText;
             prepareCalc(btnSelect);
-            break;
-
-        case document.getElementById("answer").innerText.length < 28:
+        }
+        else if (document.getElementById("answer").innerText.length < 28) {
             if (btnSelect == '0' && document.getElementById("answer").innerText.length > 0) {
                 updateDisplay(btnSelect);
             }
             else if (numReg.test(btnSelect) && btnSelect != 0 || btnSelect == '.') {
                 updateDisplay(btnSelect);
-            }
-            break;
+            }    
+        }
     }
-}
 
 
 
