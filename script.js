@@ -11,24 +11,35 @@ let lastOpp = '';
 
 //Functions for each of the operations 
 function add(a, b) {
-    return parseInt(a) + parseInt(b);
+    return parseInt(b) + parseInt(a);
 }
 
 function subtract(a, b) {
-    return a - b;
+    return parseInt(b) - parseInt(a);
 }
 
 function multiply(a, b) {
-    return a * b;
+    return parseInt(b) * parseInt(a);
 }
 
 function divide(a, b) {
-    return a / b;
+    return parseInt(b) / parseInt(a);
 }
 
 function operate(a, opp, b) {
-    if (opp == '+') {
-        document.getElementById("answer").innerText = add(a, b);
+    switch (opp) {
+        case '+':
+            document.getElementById("answer").innerText = add(a, b);
+            break;
+        case '-':
+            document.getElementById("answer").innerText = subtract(a, b);
+            break;
+        case 'X':
+            document.getElementById("answer").innerText = multiply(a, b);
+            break;
+        case '/':
+            document.getElementById("answer").innerText = divide(a, b);
+            break;
     }
 }
 
