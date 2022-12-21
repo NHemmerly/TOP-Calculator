@@ -51,11 +51,12 @@ function prepareCalc(opp) {
         operate(operandA, lastOpp, operandB);
         document.getElementById("operator").innerText = opp;
     } else if (operandsFull && operandsNonZero) {
-        operate(operandA, opp, operandB);
+        operate(operandA, lastOpp, operandB);
         operandB = document.getElementById("answer").innerText;
         document.getElementById("operator").innerText = opp;
         document.getElementById("ongoing").innerText = document.getElementById("answer").innerText;
         document.getElementById("answer").innerText = " "
+        lastOpp = opp;
 
     }
     else {
