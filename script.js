@@ -71,6 +71,14 @@ function updateDisplay(a) {
     operandA = document.getElementById("answer").innerText;
 }
 
+function clearDisplay() {
+    document.getElementById("ongoing").innerText = ' ';
+    document.getElementById("operator").innerText = '=';
+    document.getElementById("answer").innerText = ' ';
+    operandA = 0;
+    operandB = 0;
+}
+
 //Reads the content of whichever button is clicked
 function readBtn(e) {
     let btnSelect = (e.target.innerText);
@@ -80,6 +88,9 @@ function readBtn(e) {
     operandA = document.getElementById("answer").innerText;
 
     switch (true) {
+        case (btnSelect == 'clr'):
+            clearDisplay();
+            break;
         case (symbols && notEmpty):
             prepareCalc(btnSelect);
             break;
