@@ -57,7 +57,6 @@ function prepareCalc(opp) {
         document.getElementById("ongoing").innerText = document.getElementById("answer").innerText;
         document.getElementById("answer").innerText = " "
         lastOpp = opp;
-
     }
     else {
         operandB = document.getElementById("answer").innerText;
@@ -105,7 +104,7 @@ function readBtn(e) {
         case (symbols && notEmpty):
             prepareCalc(btnSelect);
             break;
-        case (document.getElementById("answer").innerText.length < 28):
+        case (document.getElementById("answer").innerText.length < 20):
             if (btnSelect == '0' && document.getElementById("answer").innerText.length > 0) {
                 updateDisplay(btnSelect);
             }
