@@ -11,19 +11,19 @@ let lastOpp = '';
 
 //Functions for each of the operations 
 function add(a, b) {
-    return parseInt(b) + parseInt(a);
+    return parseFloat(b) + parseFloat(a);
 }
 
 function subtract(a, b) {
-    return parseInt(b) - parseInt(a);
+    return parseFloat(b) - parseFloat(a);
 }
 
 function multiply(a, b) {
-    return parseInt(b) * parseInt(a);
+    return parseFloat(b) * parseFloat(a);
 }
 
 function divide(a, b) {
-    return parseInt(b) / parseInt(a);
+    return parseFloat(b) / parseFloat(a);
 }
 
 function operate(a, opp, b) {
@@ -47,6 +47,7 @@ function operate(a, opp, b) {
 function prepareCalc(opp) {
     if (opp == '=') {
         operate(operandA, lastOpp, operandB);
+        document.getElementById("operator").innerText = opp;
     } else {
         operandB = document.getElementById("answer").innerText;
         document.getElementById("ongoing").innerText = operandA;
@@ -73,9 +74,11 @@ function updateDisplay(a) {
 //Reads the content of whichever button is clicked
 function readBtn(e) {
     let btnSelect = (e.target.innerText);
-    operandA = document.getElementById("answer").innerText;
     let symbols = functReg.test(btnSelect);
-    if (symbols) {
+    let notEmpty = numReg.test(document.getElementById("answer").innerText);
+
+    operandA = document.getElementById("answer").innerText;
+    if (symbols && notEmpty) {
         prepareCalc(btnSelect);
     } else if (document.getElementById("answer").innerText.length < 28) {
         if (btnSelect == '0' && document.getElementById("answer").innerText.length > 0) {
