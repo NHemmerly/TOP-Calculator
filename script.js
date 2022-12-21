@@ -45,10 +45,16 @@ function operate(a, opp, b) {
 
 //Functions to carry out calculations
 function prepareCalc(opp) {
+    let operandsFull = (numReg.test(operandA) && numReg.test(operandB));
+    let operandsNonZero = (operandA == 0 && operandB == 0);
     if (opp == '=') {
         operate(operandA, lastOpp, operandB);
         document.getElementById("operator").innerText = opp;
-    } else {
+    } else if (operandsFull && operandsNonZero) {
+        operate(operandA, opp, operandB);
+        document.getElementById("operator").innerText = opp;
+    }
+    else {
         operandB = document.getElementById("answer").innerText;
         document.getElementById("ongoing").innerText = operandA;
         document.getElementById("operator").innerText = opp;
