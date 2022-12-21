@@ -6,35 +6,54 @@ let answer = document.getElementById("answer").innerText;
 
 let operandA = 0;
 let operandB = 0;
-let opp = "";
+
+let lastOpp = '';
 
 //Functions for each of the operations 
 function add(a, b) {
-    return a + b;
+    return parseInt(b) + parseInt(a);
 }
 
 function subtract(a, b) {
-    return a - b;
+    return parseInt(b) - parseInt(a);
 }
 
 function multiply(a, b) {
-    return a * b;
+    return parseInt(b) * parseInt(a);
 }
 
 function divide(a, b) {
-    return a / b;
+    return parseInt(b) / parseInt(a);
 }
 
 function operate(a, opp, b) {
-    return opp(a, b);
+    switch (opp) {
+        case '+':
+            document.getElementById("answer").innerText = add(a, b);
+            break;
+        case '-':
+            document.getElementById("answer").innerText = subtract(a, b);
+            break;
+        case 'X':
+            document.getElementById("answer").innerText = multiply(a, b);
+            break;
+        case '/':
+            document.getElementById("answer").innerText = divide(a, b);
+            break;
+    }
 }
 
 //Functions to carry out calculations
 function prepareCalc(opp) {
-    document.getElementById("ongoing").innerText = operandA;
-    document.getElementById("operator").innerText = opp;
-    document.getElementById("answer").innerText = " ";
-    operandB = operandA;
+    if (opp == '=') {
+        operate(operandA, lastOpp, operandB);
+    } else {
+        operandB = document.getElementById("answer").innerText;
+        document.getElementById("ongoing").innerText = operandA;
+        document.getElementById("operator").innerText = opp;
+        document.getElementById("answer").innerText = " ";
+        lastOpp = opp;
+    }
 }
 
 
@@ -54,19 +73,17 @@ function updateDisplay(a) {
 //Reads the content of whichever button is clicked
 function readBtn(e) {
     let btnSelect = (e.target.innerText);
-    switch (true) {
-        case functReg.test(btnSelect):
-            prepareCalc(btnSelect);
-            break;
-
-        case document.getElementById("answer").innerText.length < 28:
-            if (btnSelect == '0' && document.getElementById("answer").innerText.length > 0) {
-                updateDisplay(btnSelect);
-            }
-            else if (numReg.test(btnSelect) && btnSelect != 0 || btnSelect == '.') {
-                updateDisplay(btnSelect);
-            }
-            break;
+    operandA = document.getElementById("answer").innerText;
+    let symbols = functReg.test(btnSelect);
+    if (symbols) {
+        prepareCalc(btnSelect);
+    } else if (document.getElementById("answer").innerText.length < 28) {
+        if (btnSelect == '0' && document.getElementById("answer").innerText.length > 0) {
+            updateDisplay(btnSelect);
+        }
+        else if (numReg.test(btnSelect) && btnSelect != 0 || btnSelect == '.') {
+            updateDisplay(btnSelect);
+        }    
     }
 }
 
