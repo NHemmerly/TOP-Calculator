@@ -76,18 +76,23 @@ function readBtn(e) {
     let btnSelect = (e.target.innerText);
     let symbols = functReg.test(btnSelect);
     let notEmpty = numReg.test(document.getElementById("answer").innerText);
-
+    
     operandA = document.getElementById("answer").innerText;
-    if (symbols && notEmpty) {
-        prepareCalc(btnSelect);
-    } else if (document.getElementById("answer").innerText.length < 28) {
-        if (btnSelect == '0' && document.getElementById("answer").innerText.length > 0) {
-            updateDisplay(btnSelect);
-        }
-        else if (numReg.test(btnSelect) && btnSelect != 0 || btnSelect == '.') {
-            updateDisplay(btnSelect);
-        }    
+
+    switch (true) {
+        case (symbols && notEmpty):
+            prepareCalc(btnSelect);
+            break;
+        case (document.getElementById("answer").innerText.length < 28):
+            if (btnSelect == '0' && document.getElementById("answer").innerText.length > 0) {
+                updateDisplay(btnSelect);
+            }
+            else if (numReg.test(btnSelect) && btnSelect != 0 || btnSelect == '.') {
+                updateDisplay(btnSelect);
+            }
+            break;
     }
+
 }
 
 
