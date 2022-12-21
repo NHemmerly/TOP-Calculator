@@ -46,13 +46,17 @@ function operate(a, opp, b) {
 //Functions to carry out calculations
 function prepareCalc(opp) {
     let operandsFull = (numReg.test(operandA) && numReg.test(operandB));
-    let operandsNonZero = (operandA == 0 && operandB == 0);
+    let operandsNonZero = (operandA != 0 && operandB != 0);
     if (opp == '=') {
         operate(operandA, lastOpp, operandB);
         document.getElementById("operator").innerText = opp;
     } else if (operandsFull && operandsNonZero) {
         operate(operandA, opp, operandB);
+        operandB = document.getElementById("answer").innerText;
         document.getElementById("operator").innerText = opp;
+        document.getElementById("ongoing").innerText = document.getElementById("answer").innerText;
+        document.getElementById("answer").innerText = " "
+
     }
     else {
         operandB = document.getElementById("answer").innerText;
