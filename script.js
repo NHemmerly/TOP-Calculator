@@ -11,7 +11,7 @@ let lastOpp = '';
 
 //Functions for each of the operations 
 function add(a, b) {
-    return a + b;
+    return parseInt(a) + parseInt(b);
 }
 
 function subtract(a, b) {
@@ -27,14 +27,22 @@ function divide(a, b) {
 }
 
 function operate(a, opp, b) {
-    return opp(a, b);
+    if (opp == '+') {
+        document.getElementById("answer").innerText = add(a, b);
+    }
 }
 
 //Functions to carry out calculations
 function prepareCalc(opp) {
-    document.getElementById("ongoing").innerText = operandA;
-    document.getElementById("operator").innerText = opp;
-    document.getElementById("answer").innerText = " ";
+    if (opp == '=') {
+        operate(operandA, lastOpp, operandB);
+    } else {
+        operandB = document.getElementById("answer").innerText;
+        document.getElementById("ongoing").innerText = operandA;
+        document.getElementById("operator").innerText = opp;
+        document.getElementById("answer").innerText = " ";
+        lastOpp = opp;
+    }
 }
 
 
@@ -54,20 +62,19 @@ function updateDisplay(a) {
 //Reads the content of whichever button is clicked
 function readBtn(e) {
     let btnSelect = (e.target.innerText);
-    console.log(functReg.test(btnSelect));
-        if (functReg.test(btnSelect)) {
-            operandA = document.getElementById("answer").innerText;
-            prepareCalc(btnSelect);
+    operandA = document.getElementById("answer").innerText;
+    let symbols = functReg.test(btnSelect);
+    if (symbols) {
+        prepareCalc(btnSelect);
+    } else if (document.getElementById("answer").innerText.length < 28) {
+        if (btnSelect == '0' && document.getElementById("answer").innerText.length > 0) {
+            updateDisplay(btnSelect);
         }
-        else if (document.getElementById("answer").innerText.length < 28) {
-            if (btnSelect == '0' && document.getElementById("answer").innerText.length > 0) {
-                updateDisplay(btnSelect);
-            }
-            else if (numReg.test(btnSelect) && btnSelect != 0 || btnSelect == '.') {
-                updateDisplay(btnSelect);
-            }    
-        }
+        else if (numReg.test(btnSelect) && btnSelect != 0 || btnSelect == '.') {
+            updateDisplay(btnSelect);
+        }    
     }
+}
 
 
 
