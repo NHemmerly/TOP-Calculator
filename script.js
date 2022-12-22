@@ -95,6 +95,7 @@ function updateDisplay(a) {
 
 //Function for clearing the display
 function clearDisplay() {
+    postOpp = true;
     ongoing.innerText = ' ';
     operator.innerText = '=';
     answer.innerText = ' ';
@@ -169,6 +170,10 @@ function readBtn(btnSelect) {
 //Event Listener for keyboard functionality on the document
 document.addEventListener('keydown', (e) => {
     let name = e.key;
+    let code = e.keyCode;
+    if (code == 13) {
+        e.preventDefault();
+    }
     parseKey(name);
 })
 
