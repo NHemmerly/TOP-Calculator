@@ -1,6 +1,7 @@
 //Logic for the calculator
 
 const numReg = /^\d+$/;
+const floatReg = /\./;
 const functReg = /[X\+\=\/\-]/gm;
 let answer = document.getElementById("answer").innerText;
 
@@ -93,7 +94,7 @@ function clearDisplay() {
 function readBtn(e) {
     let btnSelect = (e.target.innerText);
     let symbols = functReg.test(btnSelect);
-    let notEmpty = numReg.test(document.getElementById("answer").innerText);
+    let notEmpty = numReg.test(document.getElementById("answer").innerText) || floatReg.test(document.getElementById("answer").innerText);
     
     operandA = document.getElementById("answer").innerText;
 
@@ -108,7 +109,7 @@ function readBtn(e) {
             if (btnSelect == '0' && document.getElementById("answer").innerText.length > 0) {
                 updateDisplay(btnSelect);
             }
-            else if (numReg.test(btnSelect) && btnSelect != 0 || btnSelect == '.') {
+            else if (numReg.test(btnSelect) && btnSelect != 0 || floatReg.test(btnSelect)) {
                 updateDisplay(btnSelect);
             }
             break;
