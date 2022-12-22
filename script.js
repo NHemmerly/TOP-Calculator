@@ -1,14 +1,19 @@
 //Logic for the calculator
 
+
+//Regex Used
 const numReg = /^\d+$/;
 const floatReg = /\./;
 const functReg = /[X\+\=\/\-]/gm;
 let answer = document.getElementById("answer").innerText;
 
+//Operands and variables
 let operandA = 0;
 let operandB = 0;
-
 let lastOpp = '';
+
+//Shows if operations just occured 
+let postOpp = false;
 
 //Functions for each of the operations 
 function add(a, b) {
@@ -50,6 +55,7 @@ function prepareCalc(opp) {
     let operandsNonZero = (operandA != 0 && operandB != 0);
     if (opp == '=') {
         operate(operandA, lastOpp, operandB);
+        postOpp = true;
         document.getElementById("operator").innerText = opp;
     } else if (operandsFull && operandsNonZero) {
         operate(operandA, lastOpp, operandB);
@@ -108,9 +114,14 @@ function readBtn(e) {
         case (document.getElementById("answer").innerText.length < 20):
             if (btnSelect == '0' && document.getElementById("answer").innerText.length > 0) {
                 updateDisplay(btnSelect);
-            }
-            else if (numReg.test(btnSelect) && btnSelect != 0 || floatReg.test(btnSelect)) {
-                updateDisplay(btnSelect);
+            } else if (numReg.test(btnSelect) && btnSelect != 0 || floatReg.test(btnSelect)) {
+                if (postOpp == true) {
+                    clearDisplay();
+                    postOpp = false;
+                    updateDisplay(btnSelect);
+                } else {
+                    updateDisplay(btnSelect);
+                }
             }
             break;
     }
