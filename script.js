@@ -51,22 +51,23 @@ function operate(a, opp, b) {
 function prepareCalc(opp) {
     let operandsFull = (numReg.test(operandA) && numReg.test(operandB));
     let operandsNonZero = (operandA != 0 && operandB != 0);
-    if (opp == '=') {
-        operate(operandA, lastOpp, operandB);
-        postOpp = true;
-        
-    } else if (operandsFull && operandsNonZero) {
-        operate(operandA, lastOpp, operandB);
-        operandB = document.getElementById("answer").innerText;
-        document.getElementById("ongoing").innerText = document.getElementById("answer").innerText;
-        document.getElementById("answer").innerText = " "
-        lastOpp = opp;
-    }
-    else {
-        operandB = document.getElementById("answer").innerText;
-        document.getElementById("ongoing").innerText = operandA;
-        document.getElementById("answer").innerText = " ";
-        lastOpp = opp;
+    switch (true) {
+        case (opp == '='):
+            operate(operandA, lastOpp, operandB);
+            postOpp = true;
+            break;
+        case (operandsFull && operandsNonZero):
+            operate(operandA, lastOpp, operandB);
+            operandB = document.getElementById("answer").innerText;
+            document.getElementById("ongoing").innerText = document.getElementById("answer").innerText;
+            document.getElementById("answer").innerText = " "
+            lastOpp = opp;
+            break;
+        default:
+            operandB = document.getElementById("answer").innerText;
+            document.getElementById("ongoing").innerText = operandA;
+            document.getElementById("answer").innerText = " ";
+            lastOpp = opp;
     }
     document.getElementById("operator").innerText = opp;
 }
