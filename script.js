@@ -37,6 +37,10 @@ function divide(a, b) {
     return parseFloat(b) / parseFloat(a);
 }
 
+function negateInt(a) {
+    a = parseInt(a) * -1;
+}
+
 //Function that calls operations based on calculator input
 function operate(a, opp, b) {
     switch (opp) {
@@ -148,6 +152,12 @@ function readBtn(btnSelect) {
         case (btnSelect == 'del'):
             if (postOpp == false) {
                 del();
+            }
+            break;
+        case 'neg':
+            if (numReg.test(answer.innerText)) {
+                negateInt(operandA);
+                answer.innerText = operandA;
             }
             break;
         case (symbols && notEmpty):
