@@ -1,6 +1,4 @@
 //Logic for the calculator
-
-
 //Regex Used
 const numReg = /^\d+$/;
 const floatReg = /\./;
@@ -56,11 +54,10 @@ function prepareCalc(opp) {
     if (opp == '=') {
         operate(operandA, lastOpp, operandB);
         postOpp = true;
-        document.getElementById("operator").innerText = opp;
+        
     } else if (operandsFull && operandsNonZero) {
         operate(operandA, lastOpp, operandB);
         operandB = document.getElementById("answer").innerText;
-        document.getElementById("operator").innerText = opp;
         document.getElementById("ongoing").innerText = document.getElementById("answer").innerText;
         document.getElementById("answer").innerText = " "
         lastOpp = opp;
@@ -68,12 +65,11 @@ function prepareCalc(opp) {
     else {
         operandB = document.getElementById("answer").innerText;
         document.getElementById("ongoing").innerText = operandA;
-        document.getElementById("operator").innerText = opp;
         document.getElementById("answer").innerText = " ";
         lastOpp = opp;
     }
+    document.getElementById("operator").innerText = opp;
 }
-
 
 //Functions for calculator button and display functonality
 //Updates the display based on buttons clicked, and sets some limits for when the display will update
@@ -88,6 +84,7 @@ function updateDisplay(a) {
     operandA = document.getElementById("answer").innerText;
 }
 
+//Function for clearing the display
 function clearDisplay() {
     document.getElementById("ongoing").innerText = ' ';
     document.getElementById("operator").innerText = '=';
@@ -111,6 +108,7 @@ function parseBtn(e) {
     readBtn(btnStr);
 }
 
+//Reads the contents of keyboard presses
 function parseKey(str) {
     switch (str) {
         case 'Backspace': 
@@ -122,15 +120,15 @@ function parseKey(str) {
         case 'Enter':
             str = '=';
             break;
-    }
-    
+    }   
     readBtn(str);
 }
 
+//Reads a string and decides what the calculator should do
 function readBtn(btnSelect) {
     let symbols = functReg.test(btnSelect);
     let notEmpty = numReg.test(document.getElementById("answer").innerText) || floatReg.test(document.getElementById("answer").innerText);
-    
+
     operandA = document.getElementById("answer").innerText;
 
     switch (true) {
@@ -157,9 +155,7 @@ function readBtn(btnSelect) {
             }
             break;
     }
-
 }
-
 
 //Event Listener for keyboard functionality on the document
 document.addEventListener('keydown', (e) => {
