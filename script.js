@@ -98,7 +98,11 @@ function clearDisplay() {
 
 //Function for del button or 'backspace'
 function del() {
-    document.getElementById("answer").innerText = document.getElementById("answer").innerText.slice(0, -1);
+    if (document.getElementById("answer").innerText == `0.`) {
+        clearDisplay();
+    } else {
+        document.getElementById("answer").innerText = document.getElementById("answer").innerText.slice(0, -1);
+    }
 }
 
 //Reads the content of whichever button is clicked
