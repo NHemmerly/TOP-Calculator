@@ -143,9 +143,7 @@ function readBtn(btnSelect) {
             prepareCalc(btnSelect);
             break;
         case (document.getElementById("answer").innerText.length < 20):
-            if (btnSelect == '0' && document.getElementById("answer").innerText.length > 0) {
-                updateDisplay(btnSelect);
-            } else if (numReg.test(btnSelect) && btnSelect != 0 || floatReg.test(btnSelect)) {
+            if (numReg.test(btnSelect) || floatReg.test(btnSelect)) {
                 if (postOpp == true) {
                     clearDisplay();
                     postOpp = false;
