@@ -31,6 +31,9 @@ function multiply(a, b) {
 }
 
 function divide(a, b) {
+    if (parseFloat(operandA) == 0) {
+        return "Cannot Divide by Zero"
+    }
     return parseFloat(b) / parseFloat(a);
 }
 
