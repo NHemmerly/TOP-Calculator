@@ -5,7 +5,6 @@
 const numReg = /^\d+$/;
 const floatReg = /\./;
 const functReg = /[X\+\=\/\-]/gm;
-let answer = document.getElementById("answer").innerText;
 
 //Operands and variables
 let operandA = 0;
@@ -32,6 +31,7 @@ function divide(a, b) {
     return parseFloat(b) / parseFloat(a);
 }
 
+//Function that calls operations based on calculator input
 function operate(a, opp, b) {
     switch (opp) {
         case '+':
@@ -49,7 +49,7 @@ function operate(a, opp, b) {
     }
 }
 
-//Functions to carry out calculations
+//Functions that call the logic that complete calculaions
 function prepareCalc(opp) {
     let operandsFull = (numReg.test(operandA) && numReg.test(operandB));
     let operandsNonZero = (operandA != 0 && operandB != 0);
@@ -96,6 +96,11 @@ function clearDisplay() {
     operandB = 0;
 }
 
+//Function for del button or 'backspace'
+function del() {
+    document.getElementById("answer").innerText = document.getElementById("answer").innerText.slice(0, -1);
+}
+
 //Reads the content of whichever button is clicked
 function readBtn(e) {
     let btnSelect = (e.target.innerText);
@@ -107,6 +112,9 @@ function readBtn(e) {
     switch (true) {
         case (btnSelect == 'clr'):
             clearDisplay();
+            break;
+        case (btnSelect == 'del'):
+            del();
             break;
         case (symbols && notEmpty):
             prepareCalc(btnSelect);
