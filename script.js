@@ -106,8 +106,28 @@ function del() {
 }
 
 //Reads the content of whichever button is clicked
-function readBtn(e) {
-    let btnSelect = (e.target.innerText);
+function parseBtn(e) {
+    let btnStr = e.target.innerText;
+    readBtn(btnStr);
+}
+
+function parseKey(str) {
+    switch (str) {
+        case 'Backspace': 
+            str = 'del';
+            break;
+        case '*':
+            str = 'X';
+            break;
+        case 'Enter':
+            str = '=';
+            break;
+    }
+    
+    readBtn(str);
+}
+
+function readBtn(btnSelect) {
     let symbols = functReg.test(btnSelect);
     let notEmpty = numReg.test(document.getElementById("answer").innerText) || floatReg.test(document.getElementById("answer").innerText);
     
@@ -141,6 +161,12 @@ function readBtn(e) {
 }
 
 
+//Event Listener for keyboard functionality on the document
+document.addEventListener('keydown', (e) => {
+    let name = e.key;
+    parseKey(name);
+})
 
+//Add event listeners to each of the buttons on the calculator
 const btns = document.querySelectorAll(".btn");
-btns.forEach(btn => btn.addEventListener('click', readBtn));
+btns.forEach(btn => btn.addEventListener('click', parseBtn));
