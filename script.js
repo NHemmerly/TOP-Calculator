@@ -142,7 +142,9 @@ function readBtn(btnSelect) {
             clearDisplay();
             break;
         case (btnSelect == 'del'):
-            del();
+            if (postOpp == false) {
+                del();
+            }
             break;
         case (symbols && notEmpty):
             prepareCalc(btnSelect);
