@@ -12,6 +12,11 @@ let lastOpp = '';
 //Shows if operations just occured 
 let postOpp = false;
 
+//DOM Elements
+const answer = document.getElementById('answer');
+const operator = document.getElementById('operator');
+const ongoing = document.getElementById('ongoing');
+
 //Functions for each of the operations 
 function add(a, b) {
     return parseFloat(b) + parseFloat(a);
@@ -33,16 +38,16 @@ function divide(a, b) {
 function operate(a, opp, b) {
     switch (opp) {
         case '+':
-            document.getElementById("answer").innerText = add(a, b);
+            answer.innerText = add(a, b);
             break;
         case '-':
-            document.getElementById("answer").innerText = subtract(a, b);
+            answer.innerText = subtract(a, b);
             break;
         case 'X':
-            document.getElementById("answer").innerText = multiply(a, b);
+            answer.innerText = multiply(a, b);
             break;
         case '/':
-            document.getElementById("answer").innerText = divide(a, b);
+            answer.innerText = divide(a, b);
             break;
     }
 }
@@ -58,48 +63,48 @@ function prepareCalc(opp) {
             break;
         case (operandsFull && operandsNonZero):
             operate(operandA, lastOpp, operandB);
-            operandB = document.getElementById("answer").innerText;
-            document.getElementById("ongoing").innerText = document.getElementById("answer").innerText;
-            document.getElementById("answer").innerText = " "
+            operandB = answer.innerText;
+            ongoing.innerText = answer.innerText;
+            answer.innerText = " "
             lastOpp = opp;
             break;
         default:
-            operandB = document.getElementById("answer").innerText;
-            document.getElementById("ongoing").innerText = operandA;
-            document.getElementById("answer").innerText = " ";
+            operandB = answer.innerText;
+            ongoing.innerText = operandA;
+            answer.innerText = " ";
             lastOpp = opp;
     }
-    document.getElementById("operator").innerText = opp;
+    operator.innerText = opp;
 }
 
 //Functions for calculator button and display functonality
 //Updates the display based on buttons clicked, and sets some limits for when the display will update
 function updateDisplay(a) {
-    if (a == '.' && document.getElementById("answer").innerText.length < 1) {
-        document.getElementById("answer").innerText += `0${a}`;
-    } else if (a == '.' && !(document.getElementById("answer").innerText.includes('.'))) {
-        document.getElementById("answer").innerText += `${a}`;
+    if (a == '.' && answer.innerText.length < 1) {
+        answer.innerText += `0${a}`;
+    } else if (a == '.' && !(answer.innerText.includes('.'))) {
+        answer.innerText += `${a}`;
     } else if (a != '.') {
-        document.getElementById("answer").innerText += `${a}`;
+        answer.innerText += `${a}`;
     }
-    operandA = document.getElementById("answer").innerText;
+    operandA = answer.innerText;
 }
 
 //Function for clearing the display
 function clearDisplay() {
-    document.getElementById("ongoing").innerText = ' ';
-    document.getElementById("operator").innerText = '=';
-    document.getElementById("answer").innerText = ' ';
+    ongoing.innerText = ' ';
+    operator.innerText = '=';
+    answer.innerText = ' ';
     operandA = 0;
     operandB = 0;
 }
 
 //Function for del button or 'backspace'
 function del() {
-    if (document.getElementById("answer").innerText == `0.`) {
+    if (answer.innerText == `0.`) {
         clearDisplay();
     } else {
-        document.getElementById("answer").innerText = document.getElementById("answer").innerText.slice(0, -1);
+        answer.innerText = answer.innerText.slice(0, -1);
     }
 }
 
@@ -128,9 +133,9 @@ function parseKey(str) {
 //Reads a string and decides what the calculator should do
 function readBtn(btnSelect) {
     let symbols = functReg.test(btnSelect);
-    let notEmpty = numReg.test(document.getElementById("answer").innerText) || floatReg.test(document.getElementById("answer").innerText);
+    let notEmpty = numReg.test(answer.innerText) || floatReg.test(answer.innerText);
 
-    operandA = document.getElementById("answer").innerText;
+    operandA = answer.innerText;
 
     switch (true) {
         case (btnSelect == 'clr'):
@@ -142,7 +147,7 @@ function readBtn(btnSelect) {
         case (symbols && notEmpty):
             prepareCalc(btnSelect);
             break;
-        case (document.getElementById("answer").innerText.length < 20):
+        case (answer.innerText.length < 20):
             if (numReg.test(btnSelect) || floatReg.test(btnSelect)) {
                 if (postOpp == true) {
                     clearDisplay();
