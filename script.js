@@ -127,21 +127,24 @@ function parseKey(str) {
     switch (true) {
         case str == 'Backspace': 
             str = 'del';
+            readBtn(str);
             break;
         case str == 'Escape':
-            str = 'clr'
+            str = 'clr';
+            readBtn(str);
             break;
         case str == '*':
             str = 'X';
+            readBtn(str);
             break;
         case str == 'Enter':
             str = '=';
+            readBtn(str);
             break;
         case numReg.test(str) || functReg.test(str) || floatReg.test(str):
-            str = '';
+            readBtn(str);
             break;
     }   
-    readBtn(str);
 }
 
 //Reads a string and decides what the calculator should do
