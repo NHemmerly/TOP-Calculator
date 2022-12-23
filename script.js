@@ -69,7 +69,7 @@ function prepareCalc(opp) {
             postOpp = true;
             break;
         case (operandsFull && operandsNonZero && !(operator.innerText == '=')):
-            operate(operandA, opp, operandB);
+            operate(operandA, lastOpp, operandB);
             operandB = answer.innerText;
             ongoing.innerText = answer.innerText;
             answer.innerText = " "
