@@ -1,8 +1,8 @@
 //Logic for the calculator
 //Regex Used
-const numReg = /^\d+$/;
+const numReg = /-?\d+$/;
 const floatReg = /\./;
-const functReg = /[X\+\=\/\-]/gm;
+const functReg = /[X\+\=\/\-]/;
 
 //Operands and variables
 let operandA = 0;
@@ -38,7 +38,7 @@ function divide(a, b) {
 }
 
 function negateInt(a) {
-    a = parseInt(a) * -1;
+    answer.innerText = parseFloat(answer.innerText) * -1;
 }
 
 //Function that calls operations based on calculator input
@@ -68,8 +68,8 @@ function prepareCalc(opp) {
             operate(operandA, lastOpp, operandB);
             postOpp = true;
             break;
-        case (operandsFull && operandsNonZero):
-            operate(operandA, lastOpp, operandB);
+        case (operandsFull && operandsNonZero && !(operator.innerText == '=')):
+            operate(operandA, opp, operandB);
             operandB = answer.innerText;
             ongoing.innerText = answer.innerText;
             answer.innerText = " "
@@ -154,10 +154,9 @@ function readBtn(btnSelect) {
                 del();
             }
             break;
-        case 'neg':
+        case (btnSelect == 'neg'):
             if (numReg.test(answer.innerText)) {
-                negateInt(operandA);
-                answer.innerText = operandA;
+                negateInt();
             }
             break;
         case (symbols && notEmpty):
@@ -165,7 +164,7 @@ function readBtn(btnSelect) {
             break;
         case (answer.innerText.length < 20):
             if (numReg.test(btnSelect) || floatReg.test(btnSelect)) {
-                if (postOpp == true) {
+                if (postOpp == true && operator.innerText == '=') {
                     clearDisplay();
                     postOpp = false;
                     updateDisplay(btnSelect);
