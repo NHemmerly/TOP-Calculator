@@ -128,6 +128,9 @@ function parseKey(str) {
         case 'Backspace': 
             str = 'del';
             break;
+        case 'Escape':
+            str = 'clr'
+            break;
         case '*':
             str = 'X';
             break;
@@ -150,7 +153,7 @@ function readBtn(btnSelect) {
             clearDisplay();
             break;
         case (btnSelect == 'del'):
-            if (postOpp == false) {
+            if (postOpp == false || operator.innerText != '=') {
                 del();
             }
             break;
@@ -180,7 +183,7 @@ function readBtn(btnSelect) {
 document.addEventListener('keydown', (e) => {
     let name = e.key;
     let code = e.keyCode;
-    if (code == 13) {
+    if (code == 13 || code == 27) {
         e.preventDefault();
     }
     parseKey(name);
