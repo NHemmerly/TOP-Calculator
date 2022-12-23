@@ -124,18 +124,21 @@ function parseBtn(e) {
 
 //Reads the contents of keyboard presses
 function parseKey(str) {
-    switch (str) {
-        case 'Backspace': 
+    switch (true) {
+        case str == 'Backspace': 
             str = 'del';
             break;
-        case 'Escape':
+        case str == 'Escape':
             str = 'clr'
             break;
-        case '*':
+        case str == '*':
             str = 'X';
             break;
-        case 'Enter':
+        case str == 'Enter':
             str = '=';
+            break;
+        case numReg.test(str) || functReg.test(str) || floatReg.test(str):
+            str = '';
             break;
     }   
     readBtn(str);
