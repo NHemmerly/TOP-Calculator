@@ -10,9 +10,11 @@ body {
 button {
     width: 65px;
     height: 65px;
-    background-color: #CF9F8F;
     font-size: larger;
     font-weight: 700;
+    border-color: #555;
+    border-radius: 12px;
+    background-color: #CF9F8F;
 }
 
 button:hover {
@@ -36,8 +38,9 @@ button:hover {
 .display {
     width: 365px;
     height: 100px;
+    margin-bottom: 15px;
+    border-radius: 12px;
     background-color: #8F8FDF;
-    margin: 20px;
 }
 
 .display-text {
@@ -56,5 +59,20 @@ button:hover {
 
 .nums {
     height: 27px;
+}
+
+.funct {
+    background-color: #FF5D5D;
+}
+
+.calculator {
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+    height: 450px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    background-color: #D2B5A8;
 }
 
